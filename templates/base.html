@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
+    <script type="" src="{{ url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+    <title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+    {% block body %}
+    
+    {% endblock %}
+
+
+
+
+    <!-- {% block table %}
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="jumbotron p-3-">
+                    <h2 style="padding-bottom: 5px;" >Mange <b>Loactions</b> 
+                        <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#mymodal">Add new loaction</button>
+                    
+                    
+                    </h2>
+                    <form class="d-flex" style="padding-bottom: 15px;">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                      </form>
+                    <table class = "table table-hover table-striped" >
+                        <tr>
+                            <th>פעולות</th>
+                            <th>סוג</th>
+                            <th>פלאפון</th>
+                            <th>שם</th>
+                            
+                            <th>ID</th>     
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <button href="" type="button" class="btn btn-outline-Warning btn-sm">עריכה</button>
+                                <button type="button" class="btn btn-outline-danger btn-sm" onclick="return confirm('האם אתה בטוח שברצונך למחוק?')">מחק</button>
+                                
+                            </td>
+                            <td>משתלה</td>
+                            <td>058070440</td>
+                            <td> <b>המשתלה היפנית</b> </td>
+                          
+                            <td>1</td>
+                        </tr>
+
+                        
+                    </table>
+
+
+                </div>
+            </div>
+
+
+
+            <div class="modal fade" id="mymodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Add new location</h5>
+
+
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      
+                        <form action="" method="POST">
+                           
+                            <div class="form-group">
+                                <label for="">Name:</label>
+                                <input type="text" class="form-control" name="name" required="1">
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="">Phone:</label>
+                                <input type="number" class="form-control" name="name" required="1">
+                            </div>
+                        
+                        <br>
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+
+
+        </div>
+    </div>
+
+{% endblock %} -->
+    
+</body>
+</html>

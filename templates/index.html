@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+{% include "header.html" %}
+
+
+{% block title %} Home {% endblock %}
+
+{% block body %}
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="jumbotron p-3-">
+                    
+                    <h2 style="padding-bottom: 5px;" >Mange <b>Loactions</b> 
+                        <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#mymodal">Add new loaction</button>      
+                    </h2>
+
+                    {% with massages = get_flashed_messages()%}
+                    {% if massages %}
+                        
+                        {% for message in massages %}
+
+
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{message}}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>
+
+
+                            
+                        {% endfor %}
+                    
+
+                    {% endif %}
+                {% endwith %}
+
+
+
+                    <form class="d-flex" style="padding-bottom: 15px;">
+                        <select class="form-select" style="width:8%; margin-right: 20px;" aria-label=".form-select-lg example">
+                            <option selected>ID</option>
+                            <option value="1">Name</option>
+                            <option value="2">Phone</option>
+                            <option value="3">Email</option>
+                          </select>
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+
+                      </form>
+                    <table class = "table table-hover table-striped" >
+                       
+                        <tr>
+                            <th>פעולות</th>
+                            <th>סוג</th>
+                            <th>פלאפון</th>
+                            <th>שם</th>
+                            
+                            <th>ID</th>     
+                        </tr>
+                        {% for row in locations%}
+                        <tr>
+                            <td>
+                                <button type="button" class="btn btn-outline-danger btn-sm" onclick="return confirm('האם אתה בטוח שברצונך למחוק?')">מחק</button>
+                                <button href="/update/{{row.id}}" type="button" class="btn btn-outline-Warning btn-sm" data-bs-toggle="modal" data-bs-target="#modaledit{{row.id}}">עריכה מהירה</button>
+                                <button href="/update/{{row.id}}" type="button" class="btn btn-outline-Warning btn-sm" data-bs-toggle="modal" data-bs-target="#modaledit{{row.id}}">עריכה</button>
+                                <button href="/update/{{row.id}}" type="button" class="btn btn-outline-Warning btn-sm" data-bs-toggle="modal" data-bs-target="#modaledit{{row.id}}">שכפל</button>
+                            </td>
+                            <td>משתלה</td>
+                            <td>0{{row.phone}}</td>
+                            <td> <b>{{row.name}}</b> </td>
+                          
+                            <td>{{row.id}}</td>
+                        </tr>
+
+
+                                       <!-- edit location modal -->
+
+                        <div class="modal fade" id="modaledit{{row.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Edit <b>{{row.name}}</b></h5>
+            
+            
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  
+                                    <form action="{{url_for('update')}}" method="POST">
+                                       
+                                        <div class="form-group">
+                                            <label for="">Name:</label>
+                                            <input type="hidden" name="id" value="{{row.id}}">
+                                            <input type="text" class="form-control" name="name" required="1" value="{{row.name}}">
+                                            
+                                        </div>
+            
+            
+                                        <div class="form-group">
+                                            <label for="">Phone:</label>
+                                            <input type="number" class="form-control" name="phone" value="{{row.phone}}" >
+                                        </div>
+            
+                                        <div class="form-group">
+                                            <label for="">Email:</label>
+                                            <input type="text" class="form-control" name="email" value="{{row.email}}">
+                                        </div>
+                                    
+                                    <br>
+            
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit"  class="btn btn-primary">Save changes</button>
+                                      </div>
+                                    </form>
+            
+                                </div>
+                                
+                              </div>
+                            </div>
+                          </div>
+
+
+
+
+
+
+                        {% endfor %}
+                    </table>
+
+
+                </div>
+            </div>
+
+                                                 <!-- new location modal -->
+
+            <div class="modal fade" id="mymodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Add new location</h5>
+
+
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      
+                        <form action="{{url_for('insert')}}" method="POST">
+                           
+                            <div class="form-group">
+                                <label for="">Name:</label>
+                                <input type="text" class="form-control" name="name" required="1">
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="">Phone:</label>
+                                <input type="number" class="form-control" name="phone" >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Email:</label>
+                                <input type="text" class="form-control" name="email">
+                            </div>
+                        
+                        <br>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit"  class="btn btn-primary">Save changes</button>
+                          </div>
+                        </form>
+
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+
+{% endblock %}
+
+
+<!-- {% block table %}{% endblock %} -->
+
